@@ -1,0 +1,13 @@
+.nav {
+  display: grid;
+  box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.29);
+}
+
+.nav__logo {
+}
+
+.nav__links {
+  align-self: center;
+  grid-column: 12 / 13;
+  justify-self: flex-end;
+}

@@ -1,0 +1,53 @@
+@mixin variable($property, $variable, $fallback) {
+  #{$property}: $fallback;
+  #{$property}: var($variable);
+}
+// runs like: @include variable(background, --theme-primary-color, color(blue));
+
+@function color($key) {
+  @return map-get($colors, '#{ $key }');
+}
+
+$colors: (
+  'transparent': transparent,
+  'black': lighten(#292929, 5%),
+  'white': #ffffff,
+  'text': #292929,
+  'link': darken(#ff545a, 20%),
+  'red': darken(#ff545a, 20%),
+  'blue': #2b3947
+);
+// map-merge({key: value}) to merge more colors above to take advantage of CSS variables, might prove undoable.
+
+:root {
+  @each $color, $variableColor in $colors {
+    --#{$color}: #{$variableColor};
+  }
+}
+// text-grey-darker
+@each $color, $classColor in $colors {
+  .text-#{$color} {
+    color: #{$classColor};
+    // color: var(--#{$color});
+  }
+
+  // .text-#{$color}-dark {
+  //   color: darken(#{$classColor}, 5%);
+  //   // color: var(--#{$color});
+  // }
+
+  // .text-#{$color}-darker {
+  //   color: darken(#{$classColor}, 10%);
+  //   // color: var(--#{$color});
+  // }
+
+  // .text-#{$color}-darkest {
+  //   color: darken(#{$classColor}, 15%);
+  //   // color: var(--#{$color});
+  // }
+
+  .bg-#{$color} {
+    background-color: #{$classColor};
+    // background-color: var(--#{$color});
+  }
+}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>What's here?</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="css/style.css" />
+</head>
+
+<body class="home-page">
+  <nav class="nav wrapper p-y-16 box-shadow">
+    <div class="nav__logo">
+      <a href="/" class="text-black no-underline">
+        <h1 class="h1 font-sans font-bolder uppercase">Newsme</h1>
+        <p class="italic text-black">Search for news on any topic.</p>
+      </a>
+    </div>
+    <div class="nav__links font-sans">
+      <a href="#" class="text-black no-underline">Your Feed</a>
+      <a href="saved.html" class="text-black no-underline m-left-8">Saved</a>
+    </div>
+  </nav>
+  <header class="home-header wrapper text-white font-sans text-center p-top-96 m-bottom-32">
+    <h2 class="h2 font-light uppercase m-bottom-32">Headlines for
+      <span class="js-day font-bolder"></span>
+    </h2>
+
+    <form action="post" class="m-bottom-48">
+      <label for="query" class="screenreader-only">Query</label>
+      <input class="p-left-8" type="text" placeholder="ex: Bitcoin" id="query" name="query">
+      <button class="bg-blue">
+        <span class="screenreader-only">Search</span>
+        <img src="../images/icon-search.svg" alt="">
+      </button>
+    </form>
+  </header>
+  <div class="container">
+
+  </div>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
+  <!--build:js js/main.min.js -->
+  <script src="js/index.js"></script>
+  <!-- endbuild -->
+
+</body>
+
+</html>
