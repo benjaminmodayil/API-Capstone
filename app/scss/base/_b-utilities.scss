@@ -20,6 +20,16 @@ $wideWidth: 1000;
   width: 1px;
 }
 
+.screenreader-only--with-space {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  width: 1px;
+}
+
 .desktop-only {
   display: none !important;
 }
@@ -38,6 +48,14 @@ $wideWidth: 1000;
   .wrapper {
     padding-left: 0;
     padding-right: 0;
+  }
+
+  &.wrapper-1200 {
+    max-width: 1200px;
+  }
+
+  &.wrapper-500 {
+    max-width: 500px;
   }
   // setup wrapper widths as an array then setup a forEach function to add onto here
 }
@@ -60,7 +78,7 @@ $wideWidth: 1000;
 }
 
 // margin
-$spacings: 'auto', '8', '14', '16', '32', '48', '64', '80', '96';
+$spacings: 'auto', '8', '14', '16', '24', '28', '32', '48', '64', '80', '96';
 
 @each $spacing in $spacings {
   .m-top-#{$spacing} {

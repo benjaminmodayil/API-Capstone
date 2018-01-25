@@ -4,6 +4,8 @@ var sass = require('gulp-sass')
 var concat = require('gulp-concat')
 var useref = require('gulp-useref')
 
+var ghPages = require('gulp-gh-pages')
+
 var plumber = require('gulp-plumber')
 var notify = require('gulp-notify')
 var beep = require('beepbeep')
@@ -48,6 +50,13 @@ gulp.task('sass', function() {
           stream: true
         })
       ) )
+})
+
+gulp.task('sass-build', function() {
+  return gulp
+    .src('app/css/**/*.css')
+    .pipe(plumber({ errorHandler: onError }))
+    .pipe(gulp.dest('dist/css/'))
 })
 
 // need to call this one specifically
@@ -100,8 +109,23 @@ gulp.task('watch', ['browserSync', 'sass'], function() {
   console.log("remember purgecss doesn't care about your JS class names")
 })
 
+gulp.task('build:js', function() {
+  return gulp
+    .src('app/js/**/*.js')
+    .pipe(plumber({ errorHandler: onError }))
+    .pipe(gulp.dest('dist/js/'))
+})
+
+gulp.task('deploy', function() {
+  return gulp.src('./dist/**/*').pipe(ghPages())
+})
+
 gulp.task('build', function(callback) {
-  runSequence('clean:dist', ['sass', 'useref', 'images', 'fonts'], callback)
+  runSequence(
+    'clean:dist',
+    ['sass-build', 'useref', 'build:js', 'images', 'fonts'],
+    callback
+  )
 })
 
 gulp.task('default', function(callback) {

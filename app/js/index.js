@@ -21,7 +21,10 @@ const categories = [
   'sports',
   'technology'
 ]
-$('header').append(`<div class="js-button-container"></div>`)
+$('.container').append(`<div class="js-button-container"></div>`)
+$('.container').append(
+  `<h2 class="h2 js-headline-and-search-results">Headlines for <span class="js-result-title">${setDate()}</span></h2>`
+)
 
 categories.forEach(item =>
   $('.js-button-container').append(`
@@ -30,8 +33,14 @@ categories.forEach(item =>
 )
 
 let fetchQuery = query => {
+  var myHeaders = new Headers()
+  var myInit = { method: 'GET', headers: myHeaders, mode: 'cors', cache: 'default' }
+
   fetch(
-    `https://newsapi.org/v2/everything?q=${query}&sortBy=popularity&apiKey=${newsAPIKey}`
+    query
+      ? `https://newsapi.org/v2/everything?q=${query}&sortBy=popularity&apiKey=${newsAPIKey}`
+      : `https://newsapi.org/v2/everything?q=from=2018-01-24&to=2018-01-24&sortBy=popularity&apiKey=${newsAPIKey}`,
+    myInit
   )
     .then(function(response) {
       return response.json()
@@ -139,7 +148,8 @@ function setDate() {
   weekday[5] = 'Friday'
   weekday[6] = 'Saturday'
   let currentDay = weekday[date.getDay()]
-  $('.js-day').text(currentDay)
+  // $('.js-day').text(currentDay)
+  return currentDay
 }
 
 function formFocus() {
@@ -166,4 +176,31 @@ oldItems.map(item => {
   $('[data-saved]').append(item.test)
 })
 
-$(setDate(), formFocus())
+$('.home-header__more').on('click', showFields)
+
+function showFields() {
+  let $form = $('.hidden-fields')
+  // console.log(typeof $form.attr('data-isopen'))
+
+  if ($form.attr('data-isopen') === 'false') {
+    let text = 'less'
+    $('.home-header__more__text').text(text)
+    $form.toggleClass('screenreader-only--with-space')
+    $form.attr('data-isopen', true)
+    setTimeout(() => {
+      $form.toggleClass('js-initialize-form')
+      $form.addClass('js-transition')
+    }, 50)
+  } else if ($form.attr('data-isopen') === 'true') {
+    let text = 'more'
+    $('.home-header__more__text').text(text)
+    $form.removeClass('js-transition')
+    $form.toggleClass('screenreader-only--with-space')
+    $form.attr('data-isopen', false)
+    setTimeout(() => {
+      $form.toggleClass('js-initialize-form')
+    }, 50)
+  }
+}
+
+$(setDate(), formFocus(), fetchQuery())

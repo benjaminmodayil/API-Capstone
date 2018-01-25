@@ -6,6 +6,16 @@
 
 @import 'components/nav';
 @import 'components/home-header';
+@import 'components/footer';
+
+main {
+  padding-bottom: 10vh;
+}
+
+.container {
+  padding-left: 20px;
+  padding-right: 20px;
+}
 
 .card {
   display: none !important;
