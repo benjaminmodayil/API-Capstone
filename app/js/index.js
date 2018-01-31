@@ -1,190 +1,161 @@
 let newsAPIKey = 'ed14c7ddee15497fb440c9369baf1371'
-let newsAPIURL = `https://newsapi.org/v2/everything?q=bitcoin&apiKey=${newsAPIKey}`
-// https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=
-// https://newsapi.org/v2/everything?q=apple&from=2018-01-15&to=2018-01-15&sortBy=popularity&apiKey=
-// https://newsapi.org/v2/everything?domains=wsj.com,nytimes.com
-var na_req = new Request(newsAPIURL)
-var na_Top = new Request(
-  `https://newsapi.org/v2/top-headlines?country=us&apiKey=${newsAPIKey}`
-)
-var na_req = new Request(newsAPIURL)
-let data = []
 
-let currentArticles = []
+// add items to saved.html page
+// article colors
 
-const categories = [
-  'business',
-  'entertainment',
-  'general',
-  'health',
-  'science',
-  'sports',
-  'technology'
-]
-$('.container').append(`<div class="js-button-container"></div>`)
-$('.container').append(
-  `<h2 class="h2 js-headline-and-search-results">Headlines for <span class="js-result-title">${setDate()}</span></h2>`
-)
+const el = document.querySelector('data-index')
+class ArticlePage {
+  constructor(el) {
+    this.el = el
+    this.setupDOM()
+    // this.bindEvents()
+    console.log('constructed')
+  }
 
-categories.forEach(item =>
-  $('.js-button-container').append(`
+  setupDOM() {
+    console.log('setupDom')
+    this.categories = [
+      'business',
+      'entertainment',
+      'general',
+      'health',
+      'science',
+      'sports',
+      'technology'
+    ]
+
+    this.indexPage = document.querySelector('[data-index]')
+    this.container = this.indexPage.querySelector('.container')
+
+    $(this.container).append(`<div class="js-button-container"></div>
+    <h2 class="h2 js-headline-and-search-results"><span class="js-headline-and-search-results__pre-text">Headlines for</span> <span class="js-result-title">${setDate()}</span></h2>
+    <ul></ul>`)
+
+    this.categories.forEach(item =>
+      $('.js-button-container').append(`
     <button class="js-category" data-category="${item}">${item}</button>
     `)
-)
+    )
 
-let fetchQuery = query => {
-  var myHeaders = new Headers()
-  var myInit = { method: 'GET', headers: myHeaders, mode: 'cors', cache: 'default' }
+    this.data = []
+    this.currentArticles = []
 
-  fetch(
-    query
-      ? `https://newsapi.org/v2/everything?q=${query}&sortBy=popularity&apiKey=${newsAPIKey}`
-      : `https://newsapi.org/v2/everything?q=from=2018-01-24&to=2018-01-24&sortBy=popularity&apiKey=${newsAPIKey}`,
-    myInit
-  )
-    .then(function(response) {
-      return response.json()
+    $('.home-page').on('click', '[data-category]', this.categoryFetch.bind(this))
+    $('form').on('submit', this.handleForm.bind(this))
+  }
+
+  fetchQuery(query) {
+    var myHeaders = new Headers()
+    var myInit = { method: 'GET', headers: myHeaders, mode: 'cors', cache: 'default' }
+
+    let currentDay = new Date()
+    currentDay = currentDay.toISOString().substring(0, 10)
+
+    fetch(
+      query
+        ? query
+        : `https://newsapi.org/v2/everything?q=from=${currentDay}&language=en&sortBy=popularity&apiKey=${newsAPIKey}`,
+      myInit
+    )
+      .then(function(response) {
+        return response.json()
+      })
+      .then(response => {
+        this.data = response.articles
+        this.data = unique(this.data, e => e.title)
+        this.currentArticles = this.data
+        return this.data
+      })
+      .then(data => {
+        this.renderArticles(data)
+      })
+  }
+
+  categoryFetch(e) {
+    let category = e.currentTarget.dataset.category
+    $('.js-headline-and-search-results__pre-text').text('News related to')
+    $('.js-result-title').text(category)
+    category = `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${newsAPIKey}`
+    articlePage.fetchQuery(category)
+    document
+      .querySelector('.js-headline-and-search-results')
+      .scrollIntoView({ behavior: 'smooth' })
+  }
+
+  renderArticles(data) {
+    $('ul').html('')
+    data.map((item, i) => {
+      let type = i % 5 === 0 ? 'span-half' : 'span-quarter'
+
+      let element = createCard(item, type)
+      element.style.animationDelay = `${i * 5 / 50}s`
+
+      listContainer.appendChild(element)
     })
-    .then(response => {
-      data = response.articles
-      data = unique(data, e => e.title)
-      currentArticles = data
-      return data
+
+    $('.js-card').on('click', $('.js-add-to-saved'), function(e) {
+      let title = $(e.currentTarget)
+        .find('h2')
+        .text()
+      let description = $(e.currentTarget)
+        .find('.js-card__description')
+        .text()
+
+      let author = $(e.currentTarget)
+        .find('.js-card__author')
+        .text()
+
+      let url = $(e.currentTarget).find('a')[0].href
+
+      let urlToImage = $(e.currentTarget)
+        .find('.js-card__img')[0]
+        .style.backgroundImage.slice(4, -1)
+        .replace(/"/g, '')
+
+      editLocalStorage({ title, description, author, url, urlToImage })
     })
-    .then(data => {
-      renderArticles(data)
-    })
+  }
+
+  handleForm(e) {
+    e.preventDefault()
+    let $queryValue = $('input[name="query"]').val() || ''
+    let $date1Value = $('input[name="date-1"').val()
+      ? `&from=${$('input[name="date-1"').val()}`
+      : ''
+    let $date2Value = $('input[name="date-2"')
+      ? `&to=${$('input[name="date-2"').val()}`
+      : ''
+    let $selectValue = `&category=${$('select').val()}` || ''
+    let $URL = `
+  https://newsapi.org/v2/everything?q=${$queryValue}${$date1Value}&sortBy=popularity&apiKey=${newsAPIKey}
+  `
+
+    $('.js-headline-and-search-results__pre-text').text('News related to')
+    $('.js-result-title').text($queryValue)
+
+    this.fetchQuery($URL)
+    document
+      .querySelector('.js-headline-and-search-results')
+      .scrollIntoView({ behavior: 'smooth' })
+  }
 }
 
-$('.home-page').on('click', '[data-category]', e => {
-  let category = e.currentTarget.dataset.category
-  fetchQuery(category)
-})
-
-$('.container').append(`<ul></ul>`)
-
-$('form').on('submit', e => {
-  e.preventDefault()
-  let $formValue = $('input').val()
-
-  fetchQuery($formValue)
-})
-
-// unique arrays
-function unique(arr, f) {
-  const vArr = arr.map(f)
-  return arr.filter((_, i) => vArr.indexOf(vArr[i]) === i)
-}
-//
+let articlePage = new ArticlePage()
 
 let listContainer = document.querySelector('ul')
 listContainer.classList.add('js-news-list')
-
-function createCard(item, type) {
-  let element = document.createElement(`li`)
-  element.classList.add('js-card')
-  element.classList.add('js-fadeInDown')
-
-  setTimeout(() => {
-    element.classList.remove('js-fadeInDown')
-  }, 200)
-
-  element.classList.add(`js-${type}`)
-
-  if (type === 'span-half') {
-    element.innerHTML = `<a href=${item.url}>
-  <div class="js-card__img" style="background-image:url(${
-    item.urlToImage
-  })" role="img" alt=""></div>
-       <div class="js-card__container">
-        <div class="js-card__text">
-          <h2>${item.title}</h2>
-          <p>${item.author}</p>
-          <p>${item.description}</p>
-        </div>
-       </div>
-      </a>`
-  } else {
-    element.innerHTML = `<a href=${item.url}>
-  <div class="js-card__img" style="background-image:url(${
-    item.urlToImage
-  })" role="img" alt=""></div>
-       <div class="js-card__container">
-        <div class="js-card__text">
-          <h2>${item.title}</h2>
-          <p>${item.author}</p>
-        </div>
-       </div>
-      </a>`
-  }
-
-  listContainer.appendChild(element)
-}
-
-function renderArticles(data) {
-  $('ul').html('')
-  data.map((item, i) => {
-    if (i === 0 || i === 5 || i === 10 || i === 15) {
-      setTimeout(() => {
-        createCard(item, 'span-half')
-      }, 100 + i * 100)
-    } else {
-      setTimeout(() => {
-        createCard(item, 'span-quarter')
-      }, 100 + i * 100)
-    }
-  })
-}
-
-// date
-function setDate() {
-  var date = new Date()
-  var weekday = new Array(7)
-  weekday[0] = 'Sunday'
-  weekday[1] = 'Monday'
-  weekday[2] = 'Tuesday'
-  weekday[3] = 'Wednesday'
-  weekday[4] = 'Thursday'
-  weekday[5] = 'Friday'
-  weekday[6] = 'Saturday'
-  let currentDay = weekday[date.getDay()]
-  // $('.js-day').text(currentDay)
-  return currentDay
-}
 
 function formFocus() {
   $('input:text:visible:first').focus()
 }
 
-// localstorage test
-var oldItems = JSON.parse(localStorage.getItem('itemsArray')) || []
-let tempItems = oldItems
-oldItems = []
-console.log(tempItems)
-var newItem = {
-  test: 'hi'
-  // 'product-name': itemContainer.find('h2.product-name a').text(),
-  // 'product-image': itemContainer.find('div.product-image img').attr('src'),
-  // 'product-price': itemContainer.find('span.product-price').text()
-}
-
-oldItems.push(newItem)
-
-localStorage.setItem('itemsArray', JSON.stringify(oldItems))
-
-oldItems.map(item => {
-  $('[data-saved]').append(item.test)
-})
-
 $('.home-header__more').on('click', showFields)
 
 function showFields() {
   let $form = $('.hidden-fields')
-  // console.log(typeof $form.attr('data-isopen'))
 
   if ($form.attr('data-isopen') === 'false') {
-    let text = 'less'
-    $('.home-header__more__text').text(text)
+    $('.home-header__more__text').text('less')
     $form.toggleClass('screenreader-only--with-space')
     $form.attr('data-isopen', true)
     setTimeout(() => {
@@ -192,8 +163,7 @@ function showFields() {
       $form.addClass('js-transition')
     }, 50)
   } else if ($form.attr('data-isopen') === 'true') {
-    let text = 'more'
-    $('.home-header__more__text').text(text)
+    $('.home-header__more__text').text('more')
     $form.removeClass('js-transition')
     $form.toggleClass('screenreader-only--with-space')
     $form.attr('data-isopen', false)
@@ -203,4 +173,4 @@ function showFields() {
   }
 }
 
-$(setDate(), formFocus(), fetchQuery())
+$(setDate(), formFocus(), articlePage.fetchQuery())

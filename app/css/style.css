@@ -792,6 +792,9 @@ select {
 select {
   width: 100%; }
 
+.select-category {
+  margin-bottom: 36px; }
+
 .js-category {
   background-color: transparent;
   border: 0;
@@ -909,6 +912,7 @@ body {
   background-color: #ffffff;
   border-radius: 10px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  display: grid;
   list-style: none;
   transition: all 0.2s ease; }
   .js-card a {
@@ -917,16 +921,25 @@ body {
     text-decoration: none; }
   .js-card:hover, .js-card:focus {
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.22), 0 1px 5px rgba(0, 0, 0, 0.34);
-    transform: scale(1.05); }
+    transform: scale(1.03); }
 
 .js-card__container {
-  padding: 20px; }
+  border-radius: 10px;
+  padding: 20px;
+  position: relative; }
+  .js-card__container button {
+    border: 0;
+    cursor: pointer;
+    transition: all 0.2s ease; }
+    .js-card__container button:hover, .js-card__container button:focus {
+      transform: scale(1.005); }
 
 .js-card__img {
   background-repeat: no-repeat;
   background-size: cover;
   max-height: 300px;
-  max-width: 100%; }
+  max-width: 100%;
+  min-height: 100%; }
 
 .js-span-half .js-card__img {
   border-top-left-radius: 10px;
@@ -943,9 +956,11 @@ body {
     margin-bottom: 16px; }
   .js-card__text p {
     font-size: 15px;
+    line-height: 1.5;
     margin-bottom: 16px; }
 
-.js-news-list {
+.js-news-list,
+[data-saved] {
   display: grid;
   grid-gap: 40px;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -953,27 +968,34 @@ body {
   max-width: 1400px;
   margin: 0 auto; }
 
+@media screen and (min-width: 601px) {
+  .js-card__container {
+    border-radius: 0; } }
+
 @media screen and (min-width: 900px) {
   .js-span-half {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    height: 100%;
     grid-column: span 6; }
     .js-span-half .js-card__img {
       height: 100%;
       width: 250px; }
-    .js-span-half a {
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      height: 100%; }
   .js-span-quarter {
     grid-column: span 3; }
     .js-span-quarter .js-card__img {
       width: 100%;
       height: 100px; }
-  .js-news-list {
+  .js-news-list,
+  [data-saved] {
     grid-gap: 40px;
     grid-template-columns: repeat(12, 1fr); } }
 
 .js-fadeInDown {
-  animation: fadeInDown 0.3s both ease; }
+  animation-name: fadeInDown;
+  animation-duration: 0.6s;
+  animation-fill-mode: both;
+  animation-timing-function: ease; }
 
 @keyframes fadeInDown {
   from {
@@ -982,3 +1004,12 @@ body {
   to {
     opacity: 1;
     transform: none; } }
+
+.js-add-to-saved {
+  position: absolute;
+  bottom: 20px;
+  right: 20px; }
+
+.js-stretch {
+  grid-column: 1 / -1;
+  grid-row: 1 / -1; }

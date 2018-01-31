@@ -10,6 +10,8 @@ var plumber = require('gulp-plumber')
 var notify = require('gulp-notify')
 var beep = require('beepbeep')
 
+// var rjs = require('gulp-requirejs');
+
 var uglify = require('gulp-uglify')
 var gulpIf = require('gulp-if')
 var cssnano = require('gulp-cssnano')
@@ -58,6 +60,17 @@ gulp.task('sass-build', function() {
     .pipe(plumber({ errorHandler: onError }))
     .pipe(gulp.dest('dist/css/'))
 })
+
+// gulp.task('requirejsBuild', function() {
+//   return rjs({
+//     baseUrl: 'app/js/index.js',
+//     out: 'FILENAME_TO_BE_OUTPUTTED',
+//     shim: {
+//       // standard require.js shim options
+//     }
+//     // ... more require.js options
+//   }).pipe(gulp.dest('./deploy/')) // pipe it to the output DIR
+// })
 
 // need to call this one specifically
 gulp.task('useref', function() {

@@ -9,7 +9,7 @@
   <link rel="stylesheet" type="text/css" media="screen" href="css/style.css" />
 </head>
 
-<body class="home-page">
+<body class="home-page" data-index>
   <nav class="nav wrapper p-y-16 box-shadow">
     <div class="nav__logo">
       <a href="/" class="text-black no-underline">
@@ -49,18 +49,6 @@
           <label class="block m-bottom-14" for="date-2">Ending Date</label>
           <input class="block" type="date" name="date-2" id="date-2">
         </div>
-        <div class="select-category">
-          <label class="block m-bottom-14" for="select-category">Select Category</label>
-          <select id="select-category" name="select-category">
-            <option value="general">General</option>
-            <option value="business">Business</option>
-            <option value="entertainment">Entertainment</option>
-            <option value="health">Health</option>
-            <option value="science">Science</option>
-            <option value="sports">Sports</option>
-            <option value="technology">Technology</option>
-          </select>
-        </div>
       </div>
     </form>
   </header>
@@ -82,8 +70,10 @@
 
   <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
     crossorigin="anonymous"></script>
+  <script src="js/smoothscroll-polyfill/dist/smoothscroll.min.js"></script>
   <!--build:js js/main.min.js -->
-  <script src="js/index.js"></script>
+  <script src=" js/shared.js "></script>
+  <script src=" js/index.js "></script>
   <!-- endbuild -->
 
 </body>

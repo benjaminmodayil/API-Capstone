@@ -29,6 +29,7 @@ body {
   background-color: #ffffff;
   border-radius: 10px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  display: grid;
   list-style: none;
   transition: all 0.2s ease;
 
@@ -41,12 +42,25 @@ body {
   &:hover,
   &:focus {
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.22), 0 1px 5px rgba(0, 0, 0, 0.34);
-    transform: scale(1.05);
+    transform: scale(1.03);
   }
 }
 
 .js-card__container {
+  border-radius: 10px;
   padding: 20px;
+  position: relative;
+
+  button {
+    border: 0;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover,
+    &:focus {
+      transform: scale(1.005);
+    }
+  }
 }
 
 .js-card__img {
@@ -54,6 +68,7 @@ body {
   background-size: cover;
   max-height: 300px;
   max-width: 100%;
+  min-height: 100%;
 }
 
 .js-span-half {
@@ -79,11 +94,13 @@ body {
 
   p {
     font-size: 15px;
+    line-height: 1.5;
     margin-bottom: 16px;
   }
 }
 
-.js-news-list {
+.js-news-list,
+[data-saved] {
   display: grid;
   grid-gap: 40px;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -92,19 +109,23 @@ body {
   margin: 0 auto;
 }
 
+@media screen and (min-width: 601px) {
+  .js-card__container {
+    border-radius: 0;
+  }
+}
+
 @media screen and (min-width: 900px) {
   .js-span-half {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    height: 100%;
+
     grid-column: span 6;
 
     .js-card__img {
       height: 100%;
       width: 250px;
-    }
-
-    a {
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      height: 100%;
     }
   }
 
@@ -117,7 +138,8 @@ body {
     }
   }
 
-  .js-news-list {
+  .js-news-list,
+  [data-saved] {
     grid-gap: 40px;
     grid-template-columns: repeat(12, 1fr);
   }
@@ -126,7 +148,10 @@ body {
 // from Dan Eden's animate.css
 
 .js-fadeInDown {
-  animation: fadeInDown 0.3s both ease;
+  animation-name: fadeInDown;
+  animation-duration: 0.6s;
+  animation-fill-mode: both;
+  animation-timing-function: ease;
 }
 
 @keyframes fadeInDown {
@@ -139,4 +164,15 @@ body {
     opacity: 1;
     transform: none;
   }
+}
+
+.js-add-to-saved {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}
+
+.js-stretch {
+  grid-column: 1 / -1;
+  grid-row: 1 / -1;
 }
