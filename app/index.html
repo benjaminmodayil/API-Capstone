@@ -7,6 +7,7 @@
   <title>What's here?</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" media="screen" href="css/style.css" />
+  <link rel="icon" type="image/png" href="./images/favicon.ico">
 </head>
 
 <body class="home-page" data-index>
@@ -18,7 +19,6 @@
       </a>
     </div>
     <div class="nav__links font-sans">
-      <a href="#" class="text-black no-underline">Your Feed</a>
       <a href="saved.html" class="text-black no-underline m-left-8">Saved</a>
     </div>
   </nav>
@@ -26,12 +26,12 @@
     <h2 class="h2 uppercase m-bottom-32 uppercase font-bold">Search for a topic
     </h2>
 
-    <form action="post" class="m-bottom-48">
+    <form action="post" class="m-bottom-48 m-center" aria-controls="aria-live-newsfeed">
       <label for="query" class="text-left screenreader-only">Query</label>
-      <input class="p-left-8 m-bottom-16" type="text" placeholder="ex: Bitcoin" id="query" name="query">
+      <input class="p-left-8 m-bottom-16 input--width" type="text" placeholder="ex: Bitcoin" id="query" name="query">
 
-      <button type="submit" class="bg-blue search-button">
-        <span class="screenreader-only">Search</span>
+      <button type="submit" class="bg-blue search-button search--width">
+        <span class="screenreader-only text-white f-s-16 p-botttom-16">Search</span>
         <img src="../images/icon-search.svg" alt="">
       </button>
       <div class="home-header__more-container m-center text-right">
@@ -53,7 +53,7 @@
     </form>
   </header>
 
-  <main class="container"></main>
+  <main class="container" aria-live="assertive" id="aria-live-newsfeed"></main>
 
   <footer class="wrapper text-white p-y-64">
     <div class="wrapper wrapper-1200 m-center">

@@ -737,6 +737,17 @@ p {
   grid-column: 12 / 13;
   justify-self: flex-end; }
 
+.nav__links__item--active {
+  background-color: #2e2e2e;
+  border-radius: 4px;
+  color: white;
+  padding: 5px 15px; }
+
+form {
+  width: 370px; }
+  form input {
+    width: 100%; }
+
 .home-header {
   background-image: url(../images/bg-triangles.svg);
   background-repeat: no-repeat;
@@ -771,15 +782,26 @@ form {
   cursor: pointer;
   height: 40px;
   position: relative;
-  margin-left: -55px;
-  top: 6px;
-  width: 50px; }
+  width: 100%; }
+  .search-button.search--width {
+    margin-left: -55px;
+    right: -10px;
+    top: 6px;
+    width: 50px; }
+
+.js-img--size {
+  bottom: 10px;
+  position: absolute;
+  right: 30%;
+  width: 20px; }
 
 input#query {
   border: 3px solid #2b3947;
   height: 40px;
   font-size: 14px;
-  width: 340px; }
+  width: 100%; }
+  input#query.input--width {
+    width: 335px; }
 
 input[type='date'],
 select {
@@ -825,7 +847,7 @@ select {
 .hidden-fields {
   border-radius: 4px;
   opacity: 1;
-  width: 360px; }
+  width: 370px; }
   .hidden-fields:after {
     content: '';
     display: table;
@@ -852,8 +874,7 @@ label[for='select-category'] {
   font-size: 14px; }
 
 .home-header__more-container {
-  clear: both;
-  width: 340px; }
+  clear: both; }
   .home-header__more-container:after {
     content: '';
     display: table;
@@ -915,13 +936,27 @@ body {
   display: grid;
   list-style: none;
   transition: all 0.2s ease; }
+  .js-card button {
+    position: absolute;
+    bottom: 20px;
+    height: 35px;
+    right: 20px;
+    width: 35px; }
   .js-card a {
     color: #2e2e2e;
-    display: block;
     text-decoration: none; }
   .js-card:hover, .js-card:focus {
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.22), 0 1px 5px rgba(0, 0, 0, 0.34);
     transform: scale(1.03); }
+
+button:hover .js-icon-save, button:focus .js-icon-save {
+  opacity: 0; }
+
+.js-icon-save,
+.js-icon-delete {
+  position: absolute;
+  right: 0;
+  top: 0; }
 
 .js-card__container {
   border-radius: 10px;
@@ -931,6 +966,9 @@ body {
     border: 0;
     cursor: pointer;
     transition: all 0.2s ease; }
+    .js-card__container button img {
+      max-height: 30px;
+      max-width: 30px; }
     .js-card__container button:hover, .js-card__container button:focus {
       transform: scale(1.005); }
 
@@ -972,6 +1010,10 @@ body {
   .js-card__container {
     border-radius: 0; } }
 
+@media screen and (max-width: 850px) {
+  .js-card__img-container {
+    display: none; } }
+
 @media screen and (min-width: 900px) {
   .js-span-half {
     display: grid;
@@ -1004,11 +1046,6 @@ body {
   to {
     opacity: 1;
     transform: none; } }
-
-.js-add-to-saved {
-  position: absolute;
-  bottom: 20px;
-  right: 20px; }
 
 .js-stretch {
   grid-column: 1 / -1;

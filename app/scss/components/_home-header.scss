@@ -1,4 +1,11 @@
-$form-width: 340px;
+$form-width: 370px;
+
+form {
+  width: $form-width;
+  input {
+    width: 100%;
+  }
+}
 
 .home-header {
   background-image: url(../images/bg-triangles.svg);
@@ -38,17 +45,43 @@ form {
   cursor: pointer;
   height: 40px;
   position: relative;
-  margin-left: -55px;
-  top: 6px;
+  width: 100%;
 
-  width: 50px;
+  &.search--width {
+    margin-left: -55px;
+    right: -10px;
+    top: 6px;
+    width: 50px;
+
+    // &img {
+    //   bottom: 0;
+    //   position: relative;
+    //   right: 0;
+    //   width: initial;
+    // }
+  }
+  // span {
+  //   position: relative;
+  //   // bottom: 4px;
+  // }
+}
+
+.js-img--size {
+  bottom: 10px;
+  position: absolute;
+  right: 30%;
+  width: 20px;
 }
 
 input#query {
   border: 3px solid color(blue);
   height: 40px;
   font-size: 14px;
-  width: $form-width;
+  width: 100%;
+
+  &.input--width {
+    width: 335px;
+  }
 }
 
 input[type='date'],
@@ -108,7 +141,7 @@ select {
 
   border-radius: 4px;
   opacity: 1;
-  width: $form-width + 20px;
+  width: $form-width;
 
   &.js-initialize-form {
     opacity: 0;
@@ -144,15 +177,13 @@ label[for='select-category'] {
 .home-header__more-container {
   @include clearfix();
   clear: both;
-  width: $form-width;
+  // width: $form-width;
 }
 
 .hidden-fields {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-}
-.select-category {
 }
 
 .date-1,

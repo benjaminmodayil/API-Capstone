@@ -2,3 +2,4 @@ config.codekit3
 .vscode
 #todo
 node_modules
+.publish

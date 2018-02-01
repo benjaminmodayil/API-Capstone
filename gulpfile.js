@@ -22,7 +22,7 @@ var del = require('del')
 var runSequence = require('run-sequence')
 var browserSync = require('browser-sync').create()
 
-//need a function that takes sass from specific folders (pages, components, & anything not base/reset)
+// need a function that takes sass from specific folders (pages, components, & anything not base/reset)
 // it will purgecss from these files THEN the sass task without purgecss will take effect.
 
 var onError = function(err) {
@@ -78,7 +78,7 @@ gulp.task('useref', function() {
       .src('app/*.html')
       .pipe(plumber())
       .pipe(useref())
-      .pipe(gulpIf('*.js', uglify()))
+      // .pipe(gulpIf('*.js', uglify()))
       // Minifies only if it's a CSS file
       .pipe(gulpIf('*.css', cssnano()))
       //might break (below)
