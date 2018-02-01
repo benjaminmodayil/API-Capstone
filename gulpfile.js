@@ -35,23 +35,23 @@ var onError = function(err) {
 }
 
 gulp.task('sass', function() {
-  return (gulp
-      .src('app/scss/**/*.scss')
-      .pipe(plumber({ errorHandler: onError }))
-      .pipe(sass()) // Using gulp-sass
-      // .pipe(
-      //   purgecss({
-      //     content: ['app/**/*.html'],
-      //     whitelistPatterns: [/js/]
-      //   })
-      // )
-      .pipe(gulp.dest('app/css'))
-      .pipe(
-        browserSync.reload({
-          // Reloading with Browser Sync
-          stream: true
-        })
-      ) )
+  return gulp
+    .src('app/scss/**/*.scss')
+    .pipe(plumber({ errorHandler: onError }))
+    .pipe(sass()) // Using gulp-sass
+    .pipe(
+      purgecss({
+        content: ['app/**/*.html'],
+        whitelistPatterns: [/js/]
+      })
+    )
+    .pipe(gulp.dest('app/css'))
+    .pipe(
+      browserSync.reload({
+        // Reloading with Browser Sync
+        stream: true
+      })
+    )
 })
 
 gulp.task('sass-build', function() {

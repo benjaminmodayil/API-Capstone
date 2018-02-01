@@ -1,14 +1,12 @@
 let newsAPIKey = 'ed14c7ddee15497fb440c9369baf1371'
 
 // double check form
-// button position when form is expanded (also double check on first input width)
-// menu highlight when on saved articles
-// saved page formatting
+// current category highlight
 
-// remove, functionality when click on saved button
-// 👆 same for saved page
-// issue of search going when nothing in input
+//saved page message for no saved items
 
+// make saved.js into class structure
+// gulpfile to remove css
 const el = document.querySelector('data-index')
 class ArticlePage {
   constructor(el) {
@@ -102,33 +100,46 @@ class ArticlePage {
       let $current, title, description, author, url, urlToImage
 
       $current = $(e.currentTarget)
-      title = $current
-        .closest('li')
-        .find('.js-card__text')
-        .find('h2')
-        .text()
+      title =
+        null ||
+        $current
+          .closest('li')
+          .find('.js-card__text')
+          .find('h2')
+          .text()
 
-      description = $current
-        .closest('li')
-        .find('.js-card__text')
-        .find('.js-card__description')
-        .text()
+      description =
+        null ||
+        $current
+          .closest('li')
+          .find('.js-card__text')
+          .find('.js-card__description')
+          .text()
 
-      author = $current
-        .closest('li')
-        .find('.js-card__text')
-        .find('.js-card__author')
-        .text()
+      author =
+        null ||
+        $current
+          .closest('li')
+          .find('.js-card__text')
+          .find('.js-card__author')
+          .text()
 
-      url = $current.closest('li').find('a')[0].href
+      url = null || $current.closest('li').find('a')[0].href
 
-      urlToImage = $current
-        .closest('li')
-        .find('a')
-        .first('a')
-        .find('.js-card__img')[0]
-        .style.backgroundImage.slice(4, -1)
-        .replace(/"/g, '')
+      urlToImage =
+        $current
+          .closest('li')
+          .find('a')
+          .first('a')
+          .find('.js-card__img')[0] !== undefined
+          ? $current
+              .closest('li')
+              .find('a')
+              .first('a')
+              .find('.js-card__img')[0]
+              .style.backgroundImage.slice(4, -1)
+              .replace(/"/g, '')
+          : ''
 
       if ($(this).hasClass('js-add-to-saved')) {
         let iconDelete = document.createElement('img')
@@ -214,9 +225,9 @@ function showFields() {
       $form.toggleClass('js-initialize-form')
       $form.addClass('js-transition')
     }, 50)
-    $searchButton.removeClass('search--width')
+    $searchButton.removeClass('js-search--width')
     $searchButton.find('.screenreader-only').removeClass('screenreader-only')
-    $('input#query').removeClass('input--width')
+    $('input#query').removeClass('js-input--width')
     $searchButton.find('img').addClass('js-img--size')
     $form.append($searchButton)
   } else if ($form.attr('data-isopen') === 'true') {
@@ -228,10 +239,10 @@ function showFields() {
       $form.toggleClass('js-initialize-form')
     }, 50)
 
-    $searchButton.addClass('search--width')
+    $searchButton.addClass('js-search--width')
     $searchButton.find('span').addClass('screenreader-only')
     $searchButton.find('img').removeClass('js-img--size')
-    $('input#query').addClass('input--width')
+    $('input#query').addClass('js-input--width')
     $('input#query').after($searchButton)
   }
 }

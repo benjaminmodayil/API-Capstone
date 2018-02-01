@@ -47,23 +47,12 @@ form {
   position: relative;
   width: 100%;
 
-  &.search--width {
+  &.js-search--width {
     margin-left: -55px;
     right: -10px;
     top: 6px;
     width: 50px;
-
-    // &img {
-    //   bottom: 0;
-    //   position: relative;
-    //   right: 0;
-    //   width: initial;
-    // }
   }
-  // span {
-  //   position: relative;
-  //   // bottom: 4px;
-  // }
 }
 
 .js-img--size {
@@ -79,7 +68,7 @@ input#query {
   font-size: 14px;
   width: 100%;
 
-  &.input--width {
+  &.js-input--width {
     width: 335px;
   }
 }
