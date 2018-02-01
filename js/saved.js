@@ -13,16 +13,13 @@ tempItems.map((item, i) => {
 })
 
 $('.js-remove-saved').on('click', function(e) {
-  console.log('testing')
   $current = $(e.currentTarget)
   title = $current
     .closest('li')
     .find('.js-card__text')
     .find('h2')
     .text()
-  console.log(title)
   removeLocalStorage(title)
-  console.log(oldItems)
   $(this)
     .closest('li')
     .remove()

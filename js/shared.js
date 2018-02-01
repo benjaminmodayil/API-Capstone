@@ -5,7 +5,6 @@ function editLocalStorage(newItem) {
 
   oldItems.push(newItem)
   let allTheNew = oldItems.concat(tempItems)
-  console.log(allTheNew)
 
   localStorage.setItem('itemsArray', JSON.stringify(allTheNew))
 }
