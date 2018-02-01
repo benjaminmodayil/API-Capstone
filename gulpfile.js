@@ -87,7 +87,7 @@ gulp.task('useref', function() {
 
 gulp.task('images', function() {
   return (gulp
-      .src('app/images/**/*.+(png|jpg|jpeg|gif|svg)')
+      .src('app/images/**/*.+(png|jpg|jpeg|gif|svg|ico)')
       .pipe(plumber())
       // Caching images that ran through imagemin
       .pipe(cache(imagemin({ interlaced: true })))
