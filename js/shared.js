@@ -42,17 +42,22 @@ function createCard(item, type, iconIsRemove = false) {
   element.classList.add(`js-${type}`)
 
   let descriptionCheck =
-    type === 'span-half'
+    type === 'span-half' && item.description !== null && item.description !== undefined
       ? `
         <p class="js-card__description">${item.description.substr(0, 85)}...</p>`
       : ''
 
-  let imageCheck =
+  let imageCheck
+
+  if (
     item.urlToImage === undefined ||
     item.urlToImage === null ||
-    item.urlToImage.charAt(0) === `/`
-      ? true
-      : false
+    item.urlToImage.length === 0
+  ) {
+    imageCheck = true
+  } else {
+    imageCheck = false
+  }
 
   let title = item.title === null ? (element.innerHTML = '') : item.title
   let authorTemplate = `<p class="js-card__author">${item.author}</p>`

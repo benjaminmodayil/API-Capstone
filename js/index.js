@@ -1,20 +1,14 @@
 let newsAPIKey = 'ed14c7ddee15497fb440c9369baf1371'
 
 // double check form
-// button position when form is expanded (also double check on first input width)
-// menu highlight when on saved articles
-// saved page formatting
 
-// remove, functionality when click on saved button
-// 👆 same for saved page
-// issue of search going when nothing in input
+// make saved.js into class structure
 
 const el = document.querySelector('data-index')
 class ArticlePage {
   constructor(el) {
     this.el = el
     this.setupDOM()
-    // this.bindEvents()
   }
 
   setupDOM() {
@@ -33,7 +27,7 @@ class ArticlePage {
 
     $(this.container).append(`<div class="js-button-container"></div>
     <h2 class="h2 js-headline-and-search-results"><span class="js-headline-and-search-results__pre-text">Headlines for</span> <span class="js-result-title">${setDate()}</span></h2>
-    <ul></ul>`)
+    <ul class="m-center"></ul>`)
 
     this.categories.forEach(item =>
       $('.js-button-container').append(`
@@ -58,7 +52,7 @@ class ArticlePage {
     fetch(
       query
         ? query
-        : `https://newsapi.org/v2/everything?q=from=${currentDay}&language=en&sortBy=popularity&apiKey=${newsAPIKey}`,
+        : `https://newsapi.org/v2/top-headlines?country=us&apiKey=ed14c7ddee15497fb440c9369baf1371`,
       myInit
     )
       .then(function(response) {
@@ -77,6 +71,8 @@ class ArticlePage {
 
   categoryFetch(e) {
     let category = e.currentTarget.dataset.category
+    $('.js-category--highlight').removeClass('js-category--highlight')
+    $(e.currentTarget).addClass('js-category--highlight')
     $('.js-headline-and-search-results__pre-text').text('News related to')
     $('.js-result-title').text(category)
     category = `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${newsAPIKey}`
@@ -102,33 +98,46 @@ class ArticlePage {
       let $current, title, description, author, url, urlToImage
 
       $current = $(e.currentTarget)
-      title = $current
-        .closest('li')
-        .find('.js-card__text')
-        .find('h2')
-        .text()
+      title =
+        null ||
+        $current
+          .closest('li')
+          .find('.js-card__text')
+          .find('h2')
+          .text()
 
-      description = $current
-        .closest('li')
-        .find('.js-card__text')
-        .find('.js-card__description')
-        .text()
+      description =
+        null ||
+        $current
+          .closest('li')
+          .find('.js-card__text')
+          .find('.js-card__description')
+          .text()
 
-      author = $current
-        .closest('li')
-        .find('.js-card__text')
-        .find('.js-card__author')
-        .text()
+      author =
+        null ||
+        $current
+          .closest('li')
+          .find('.js-card__text')
+          .find('.js-card__author')
+          .text()
 
-      url = $current.closest('li').find('a')[0].href
+      url = null || $current.closest('li').find('a')[0].href
 
-      urlToImage = $current
-        .closest('li')
-        .find('a')
-        .first('a')
-        .find('.js-card__img')[0]
-        .style.backgroundImage.slice(4, -1)
-        .replace(/"/g, '')
+      urlToImage =
+        $current
+          .closest('li')
+          .find('a')
+          .first('a')
+          .find('.js-card__img')[0] !== undefined
+          ? $current
+              .closest('li')
+              .find('a')
+              .first('a')
+              .find('.js-card__img')[0]
+              .style.backgroundImage.slice(4, -1)
+              .replace(/"/g, '')
+          : ''
 
       if ($(this).hasClass('js-add-to-saved')) {
         let iconDelete = document.createElement('img')
@@ -143,6 +152,7 @@ class ArticlePage {
         $(iconSave)
           .attr('src', './images/icon-save.svg')
           .addClass('js-icon-save')
+
         $(this).append(iconDelete)
 
         $(this).append(iconSave)
@@ -154,8 +164,12 @@ class ArticlePage {
         editLocalStorage({ title, description, author, url, urlToImage })
       } else if ($(this).hasClass('js-remove-saved')) {
         removeLocalStorage(title)
-        $('.js-icon-delete').remove()
-        $('.js-icon-save').remove()
+        $(this)
+          .find($('.js-icon-delete'))
+          .remove()
+        $(this)
+          .find($('.js-icon-save'))
+          .remove()
         $(this).removeClass('js-remove-saved')
         $(this).addClass('js-add-to-saved')
       }
@@ -172,9 +186,7 @@ class ArticlePage {
       : ''
     $date2Value = $('input[name="date-2"') ? `&to=${$('input[name="date-2"').val()}` : ''
     $selectValue = `&category=${$('select').val()}` || ''
-    $URL = `
-  https://newsapi.org/v2/everything?q=${$queryValue}${$date1Value}&sortBy=popularity&apiKey=${newsAPIKey}
-  `
+    $URL = `https://newsapi.org/v2/everything?q=${$queryValue}${$date1Value}&sortBy=popularity&apiKey=${newsAPIKey}`
     if ($queryValue.trim() === '') {
       return
     } else {
@@ -214,9 +226,9 @@ function showFields() {
       $form.toggleClass('js-initialize-form')
       $form.addClass('js-transition')
     }, 50)
-    $searchButton.removeClass('search--width')
+    $searchButton.removeClass('js-search--width')
     $searchButton.find('.screenreader-only').removeClass('screenreader-only')
-    $('input#query').removeClass('input--width')
+    $('input#query').removeClass('js-input--width')
     $searchButton.find('img').addClass('js-img--size')
     $form.append($searchButton)
   } else if ($form.attr('data-isopen') === 'true') {
@@ -228,10 +240,10 @@ function showFields() {
       $form.toggleClass('js-initialize-form')
     }, 50)
 
-    $searchButton.addClass('search--width')
+    $searchButton.addClass('js-search--width')
     $searchButton.find('span').addClass('screenreader-only')
     $searchButton.find('img').removeClass('js-img--size')
-    $('input#query').addClass('input--width')
+    $('input#query').addClass('js-input--width')
     $('input#query').after($searchButton)
   }
 }
