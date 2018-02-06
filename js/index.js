@@ -179,7 +179,7 @@ class ArticlePage {
   handleForm(e) {
     e.preventDefault()
     let $queryValue, $date1Value, $date2Value, $selectValue, $URL
-
+    $('.js-category--highlight').removeClass('js-category--highlight')
     $queryValue = $('input[name="query"]').val() || ''
     $date1Value = $('input[name="date-1"').val()
       ? `&from=${$('input[name="date-1"').val()}`
