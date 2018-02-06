@@ -1,18 +1,14 @@
 let newsAPIKey = 'ed14c7ddee15497fb440c9369baf1371'
 
 // double check form
-// current category highlight
-
-//saved page message for no saved items
 
 // make saved.js into class structure
-// gulpfile to remove css
+
 const el = document.querySelector('data-index')
 class ArticlePage {
   constructor(el) {
     this.el = el
     this.setupDOM()
-    // this.bindEvents()
   }
 
   setupDOM() {
@@ -31,7 +27,7 @@ class ArticlePage {
 
     $(this.container).append(`<div class="js-button-container"></div>
     <h2 class="h2 js-headline-and-search-results"><span class="js-headline-and-search-results__pre-text">Headlines for</span> <span class="js-result-title">${setDate()}</span></h2>
-    <ul></ul>`)
+    <ul class="m-center"></ul>`)
 
     this.categories.forEach(item =>
       $('.js-button-container').append(`
@@ -56,7 +52,7 @@ class ArticlePage {
     fetch(
       query
         ? query
-        : `https://newsapi.org/v2/everything?q=from=${currentDay}&language=en&sortBy=popularity&apiKey=${newsAPIKey}`,
+        : `https://newsapi.org/v2/top-headlines?country=us&apiKey=ed14c7ddee15497fb440c9369baf1371`,
       myInit
     )
       .then(function(response) {
@@ -75,6 +71,8 @@ class ArticlePage {
 
   categoryFetch(e) {
     let category = e.currentTarget.dataset.category
+    $('.js-category--highlight').removeClass('js-category--highlight')
+    $(e.currentTarget).addClass('js-category--highlight')
     $('.js-headline-and-search-results__pre-text').text('News related to')
     $('.js-result-title').text(category)
     category = `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${newsAPIKey}`
@@ -154,6 +152,7 @@ class ArticlePage {
         $(iconSave)
           .attr('src', './images/icon-save.svg')
           .addClass('js-icon-save')
+
         $(this).append(iconDelete)
 
         $(this).append(iconSave)
@@ -165,8 +164,12 @@ class ArticlePage {
         editLocalStorage({ title, description, author, url, urlToImage })
       } else if ($(this).hasClass('js-remove-saved')) {
         removeLocalStorage(title)
-        $('.js-icon-delete').remove()
-        $('.js-icon-save').remove()
+        $(this)
+          .find($('.js-icon-delete'))
+          .remove()
+        $(this)
+          .find($('.js-icon-save'))
+          .remove()
         $(this).removeClass('js-remove-saved')
         $(this).addClass('js-add-to-saved')
       }
@@ -176,16 +179,14 @@ class ArticlePage {
   handleForm(e) {
     e.preventDefault()
     let $queryValue, $date1Value, $date2Value, $selectValue, $URL
-
+    $('.js-category--highlight').removeClass('js-category--highlight')
     $queryValue = $('input[name="query"]').val() || ''
     $date1Value = $('input[name="date-1"').val()
       ? `&from=${$('input[name="date-1"').val()}`
       : ''
     $date2Value = $('input[name="date-2"') ? `&to=${$('input[name="date-2"').val()}` : ''
     $selectValue = `&category=${$('select').val()}` || ''
-    $URL = `
-  https://newsapi.org/v2/everything?q=${$queryValue}${$date1Value}&sortBy=popularity&apiKey=${newsAPIKey}
-  `
+    $URL = `https://newsapi.org/v2/everything?q=${$queryValue}${$date1Value}&sortBy=popularity&apiKey=${newsAPIKey}`
     if ($queryValue.trim() === '') {
       return
     } else {

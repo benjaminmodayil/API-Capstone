@@ -201,3 +201,14 @@ button {
   grid-column: 1 / -1;
   grid-row: 1 / -1;
 }
+
+.js-category--highlight {
+  background-color: color(blue);
+  border-radius: 4px;
+  color: white;
+  font-weight: 300;
+}
+
+.js-span-all {
+  grid-column: 1 / -1;
+}

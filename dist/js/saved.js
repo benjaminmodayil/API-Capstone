@@ -1,3 +1,4 @@
+// function renderSaved() {
 let oldItems, tempItems
 
 oldItems = JSON.parse(localStorage.getItem('itemsArray')) || []
@@ -11,6 +12,7 @@ tempItems.map((item, i) => {
   element.style.animationDelay = `${i * 5 / 50}s`
   $('[data-saved]').append(element)
 })
+// }
 
 $('.js-remove-saved').on('click', function(e) {
   $current = $(e.currentTarget)
@@ -19,8 +21,25 @@ $('.js-remove-saved').on('click', function(e) {
     .find('.js-card__text')
     .find('h2')
     .text()
+
   removeLocalStorage(title)
+
   $(this)
     .closest('li')
     .remove()
+
+  checkIfAnySavedArticles()
 })
+
+function checkIfAnySavedArticles() {
+  let articleCheck = $('[data-saved]').find('li')[0] ? true : false
+  let template = `<p class="uppercase text-center js-span-all">No articles found</p>
+  <p class="text-center js-span-all">Save an article and come back here to read later.</p>`
+  if (!articleCheck) {
+    $('[data-saved]').append(template)
+  }
+}
+
+checkIfAnySavedArticles()
+
+// $(, renderSaved())
