@@ -1,6 +1,7 @@
 let newsAPIKey = 'ed14c7ddee15497fb440c9369baf1371'
 
 // double check form
+// remove news based on having image/descriptions/etc
 
 // make saved.js into class structure
 
@@ -83,15 +84,14 @@ class ArticlePage {
   }
 
   renderArticles(data) {
+    $('ul').addClass('js-list')
     $('ul').html('')
     data.map((item, i) => {
       let type, element
 
       type = i % 5 === 0 ? 'span-half' : 'span-quarter'
-      element = createCard(item, type)
-      element.style.animationDelay = `${i * 5 / 50}s`
-
-      listContainer.appendChild(element)
+      element = createCard(item, type, i)
+      listContainer.insertAdjacentHTML('beforeend', element)
     })
 
     $('.js-card__button').on('click', function(e) {
