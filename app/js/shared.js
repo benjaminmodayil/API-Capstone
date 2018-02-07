@@ -35,19 +35,22 @@ function unique(arr, f) {
   return arr.filter((_, i) => vArr.indexOf(vArr[i]) === i)
 }
 
-function createCard(item, type, iconIsRemove = false) {
-  let element = document.createElement(`li`)
-  element.classList.add('js-card')
-  element.classList.add('js-fadeInDown')
-  element.classList.add(`js-${type}`)
+function createCard(item, type, i = 0, iconIsRemove = false) {
+  let element,
+    descriptionCheck,
+    imageCheck,
+    title,
+    authorTemplate,
+    authorCheck,
+    imageTemplate,
+    correctIcon,
+    correctClass
 
-  let descriptionCheck =
+  descriptionCheck =
     type === 'span-half' && item.description !== null && item.description !== undefined
       ? `
         <p class="js-card__description">${item.description.substr(0, 85)}...</p>`
       : ''
-
-  let imageCheck
 
   if (
     item.urlToImage === undefined ||
@@ -55,29 +58,31 @@ function createCard(item, type, iconIsRemove = false) {
     item.urlToImage.length === 0
   ) {
     imageCheck = true
+    type = 'span-small'
   } else {
     imageCheck = false
   }
 
-  let title = item.title === null ? (element.innerHTML = '') : item.title
-  let authorTemplate = `<p class="js-card__author">${item.author}</p>`
+  title = item.title === null ? (element = '') : item.title
+  authorTemplate = `<p class="js-card__author">${item.author}</p>`
 
-  let authorCheck = item.author === null ? true : false
+  authorCheck = item.author === null ? true : false
 
-  let imageTemplate = `<a class="js-card__img-container" href=${item.url}>
+  imageTemplate = `<a class="js-card__img-container" href=${item.url}>
       <div class="js-card__img" style="background-image:url(${
         item.urlToImage
       })" role="img" alt="">
       </div>
     </a>
   `
-  let correctIcon = iconIsRemove
+  correctIcon = iconIsRemove
     ? `<img class="icon-file-delete" src="./images/icon-delete.svg">`
     : `<img class="icon-file-add" src="./images/file-add.svg">`
 
-  let correctClass = iconIsRemove ? `js-remove-saved` : `js-add-to-saved`
+  correctClass = iconIsRemove ? `js-remove-saved` : `js-add-to-saved`
 
-  element.innerHTML = `
+  element = `
+  <li class="js-card js-fadeInDown js-${type}" style="animation-delay: ${i * 5 / 50}s">
   ${imageCheck === false ? imageTemplate : ''}
        <div class="js-card__container ${imageCheck === true ? 'js-stretch' : ''}">
         <div class="js-card__text">
@@ -89,6 +94,7 @@ function createCard(item, type, iconIsRemove = false) {
         </div>
         <button class="js-card__button ${correctClass}" type="button" title="save article"><span class="screenreader-only">save article</span>${correctIcon}</button>
        </div>
+       </li>
       `
   return element
 }

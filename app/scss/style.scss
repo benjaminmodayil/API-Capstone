@@ -104,6 +104,7 @@ button {
     border-bottom-left-radius: 10px;
   }
 }
+
 .js-span-quarter {
   .js-card__img {
     border-top-left-radius: 10px;
@@ -147,12 +148,18 @@ button {
   }
 }
 @media screen and (min-width: 900px) {
+  .js-span-small {
+    grid-column: span 3;
+    grid-row: span 2;
+  }
+
   .js-span-half {
     display: grid;
     grid-template-columns: 1fr 2fr;
     height: 100%;
 
     grid-column: span 6;
+    grid-row: span 4;
 
     .js-card__img {
       height: 100%;
@@ -161,6 +168,7 @@ button {
   }
 
   .js-span-quarter {
+    grid-row: span 4;
     grid-column: span 3;
 
     .js-card__img {
@@ -173,6 +181,8 @@ button {
   [data-saved] {
     grid-gap: 40px;
     grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(autofit, 50px);
+    // grid-template-rows: repeat(12, 50px);
   }
 }
 
