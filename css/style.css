@@ -52,7 +52,6 @@ body {
   min-height: 100vh; }
 
 body {
-  background: #f5f5f5;
   display: flex;
   flex-direction: column;
   font-family: "Roboto", san-serif;
@@ -126,6 +125,9 @@ p {
 .m-bottom-16 {
   margin-bottom: 16px; }
 
+.m-right-16 {
+  margin-right: 16px; }
+
 .p-y-16 {
   padding-top: 16px;
   padding-bottom: 16px; }
@@ -154,6 +156,9 @@ p {
 
 .float-right {
   float: right; }
+
+.float-left {
+  float: left; }
 
 :root {
   --transparent: transparent;
@@ -187,6 +192,14 @@ p {
   border-radius: 4px;
   color: white;
   padding: 5px 15px; }
+
+.nav__logo a:after {
+  content: '';
+  display: table;
+  clear: both; }
+
+.nav__logo p {
+  width: 75%; }
 
 form {
   width: 370px; }
@@ -262,8 +275,7 @@ input[type='date'] {
   font-family: "Roboto", san-serif;
   font-size: 18px;
   font-weight: 600;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin: 10px;
   text-transform: capitalize; }
   .js-category:hover, .js-category:focus {
     text-decoration: underline; }
@@ -360,9 +372,6 @@ main {
   padding-left: 20px;
   padding-right: 20px; }
 
-body {
-  background-color: #f5f5f5; }
-
 .js-card {
   background-color: #ffffff;
   border-radius: 10px;
@@ -451,6 +460,9 @@ button:hover .js-icon-save, button:focus .js-icon-save {
   .js-span-small {
     grid-column: span 3;
     grid-row: span 2; }
+    .js-span-small.js-span-small h2 {
+      font-size: 18px;
+      margin-bottom: 40px; }
   .js-span-half {
     display: grid;
     grid-template-columns: 1fr 2fr;
@@ -475,7 +487,7 @@ button:hover .js-icon-save, button:focus .js-icon-save {
 .js-fadeInDown {
   animation-name: fadeInDown;
   animation-duration: 0.6s;
-  animation-fill-mode: both;
+  animation-fill-mode: backwards;
   animation-timing-function: ease; }
 
 @keyframes fadeInDown {
@@ -495,6 +507,8 @@ button:hover .js-icon-save, button:focus .js-icon-save {
   border-radius: 4px;
   color: white;
   font-weight: 300; }
+  .js-category--highlight.js-category {
+    text-decoration: none; }
 
 .js-span-all {
   grid-column: 1 / -1; }

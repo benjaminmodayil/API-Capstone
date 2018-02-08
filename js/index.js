@@ -1,7 +1,6 @@
 let newsAPIKey = 'ed14c7ddee15497fb440c9369baf1371'
 
 // double check form
-// remove news based on having image/descriptions/etc
 
 // make saved.js into class structure
 
@@ -14,9 +13,9 @@ class ArticlePage {
 
   setupDOM() {
     this.categories = [
+      'general',
       'business',
       'entertainment',
-      'general',
       'health',
       'science',
       'sports',
