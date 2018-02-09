@@ -26,7 +26,7 @@ class ArticlePage {
     this.container = this.indexPage.querySelector('.container')
 
     $(this.container).append(`<div class="js-button-container"></div>
-    <h2 class="h2 js-headline-and-search-results"><span class="js-headline-and-search-results__pre-text">Headlines for</span> <span class="js-result-title">${setDate()}</span></h2>
+    <h1 class="h2 js-headline-and-search-results"><span class="js-headline-and-search-results__pre-text">Headlines for</span> <span class="js-result-title">${setDate()}</span></h1>
     <ul class="m-center"></ul>`)
 
     this.categories.forEach(item =>
@@ -139,10 +139,14 @@ class ArticlePage {
           : ''
 
       if ($(this).hasClass('js-add-to-saved')) {
+        let template = `<a href="/saved.html" class="js-card__button__view-saved">View Saved</a>`
+        $(this)
+          .closest('.js-card__button-container')
+          .prepend(template)
         let iconDelete = document.createElement('img')
         let iconSave = document.createElement('img')
 
-        $(this).attr('title', 'saved')
+        $(this).attr('title', 'remove')
 
         $(iconDelete)
           .attr('src', './images/icon-delete.svg')
@@ -163,6 +167,10 @@ class ArticlePage {
         editLocalStorage({ title, description, author, url, urlToImage })
       } else if ($(this).hasClass('js-remove-saved')) {
         removeLocalStorage(title)
+        $(this)
+          .closest('.js-card__button-container')
+          .find('.js-card__button__view-saved')
+          .remove()
         $(this)
           .find($('.js-icon-delete'))
           .remove()
@@ -218,7 +226,7 @@ function showFields() {
   let $searchButton = $('.search-button')
 
   if ($form.attr('data-isopen') === 'false') {
-    $('.home-header__more__text').text('less')
+    $('.home-header__more__text').text('hide filter')
     $form.toggleClass('screenreader-only--with-space')
     $form.attr('data-isopen', true)
     setTimeout(() => {
@@ -231,7 +239,7 @@ function showFields() {
     $searchButton.find('img').addClass('js-img--size')
     $form.append($searchButton)
   } else if ($form.attr('data-isopen') === 'true') {
-    $('.home-header__more__text').text('more')
+    $('.home-header__more__text').text('filter')
     $form.removeClass('js-transition')
     $form.toggleClass('screenreader-only--with-space')
     $form.attr('data-isopen', false)

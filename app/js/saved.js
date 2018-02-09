@@ -8,10 +8,8 @@ tempItems.map((item, i) => {
 
   type = i % 5 === 0 ? 'span-half' : 'span-quarter'
   element = createCard(item, type, i, true)
-  // element.style.animationDelay = `${i * 5 / 50}s`
   $('[data-saved]').append(element)
 })
-// }
 
 $('.js-remove-saved').on('click', function(e) {
   $current = $(e.currentTarget)

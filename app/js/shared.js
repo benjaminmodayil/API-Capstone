@@ -92,7 +92,9 @@ function createCard(item, type, i = 0, iconIsRemove = false) {
             ${descriptionCheck}
           </a>
         </div>
-        <button class="js-card__button ${correctClass}" type="button" title="save article"><span class="screenreader-only">save article</span>${correctIcon}</button>
+        <div class="js-card__button-container">
+          <button class="js-card__button ${correctClass}" type="button" title="save article"><span class="screenreader-only">save article</span>${correctIcon}</button>
+        </div>
        </div>
        </li>
       `

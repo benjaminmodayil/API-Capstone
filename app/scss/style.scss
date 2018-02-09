@@ -30,10 +30,11 @@ main {
   transition: all 0.2s ease;
 
   button {
-    position: absolute;
-    bottom: 20px;
+    background-color: transparent;
+    // bottom: -10px;
     height: 35px;
-    right: 20px;
+    position: relative;
+    // right: -90%;
     width: 35px;
   }
 
@@ -49,12 +50,37 @@ main {
   }
 }
 
+.js-card__button-container {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
 button {
   &:hover,
   &:focus {
     .js-icon-save {
       opacity: 0;
     }
+  }
+}
+
+.js-card__button__view-saved {
+  animation: slidetoleft 0.5s both ease-out;
+  display: inline-block;
+}
+
+@keyframes slidetoleft {
+  from {
+    opacity: 0;
+    // transform: translate(-500px, 0);
+    transform: translate(40px);
+  }
+
+  to {
+    opacity: 1;
+    // transform: translateX(0, 0);
+    transform: translate(0px);
   }
 }
 
@@ -119,7 +145,9 @@ button {
   p {
     font-size: 15px;
     line-height: 1.5;
-    margin-bottom: 16px;
+    &:first-of-type {
+      margin-bottom: 16px;
+    }
   }
 }
 

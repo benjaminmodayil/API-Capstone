@@ -138,8 +138,8 @@ p {
 .m-bottom-32 {
   margin-bottom: 32px; }
 
-.m-bottom-48 {
-  margin-bottom: 48px; }
+.p-top-32 {
+  padding-top: 32px; }
 
 .m-top-64 {
   margin-top: 64px; }
@@ -150,9 +150,6 @@ p {
 
 .m-bottom-96 {
   margin-bottom: 96px; }
-
-.p-top-96 {
-  padding-top: 96px; }
 
 .float-right {
   float: right; }
@@ -380,10 +377,9 @@ main {
   list-style: none;
   transition: all 0.2s ease; }
   .js-card button {
-    position: absolute;
-    bottom: 20px;
+    background-color: transparent;
     height: 35px;
-    right: 20px;
+    position: relative;
     width: 35px; }
   .js-card a {
     color: #2e2e2e;
@@ -392,8 +388,25 @@ main {
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.22), 0 1px 5px rgba(0, 0, 0, 0.34);
     transform: scale(1.03); }
 
+.js-card__button-container {
+  position: absolute;
+  bottom: 10px;
+  right: 10px; }
+
 button:hover .js-icon-save, button:focus .js-icon-save {
   opacity: 0; }
+
+.js-card__button__view-saved {
+  animation: slidetoleft 0.5s both ease-out;
+  display: inline-block; }
+
+@keyframes slidetoleft {
+  from {
+    opacity: 0;
+    transform: translate(40px); }
+  to {
+    opacity: 1;
+    transform: translate(0px); } }
 
 .js-icon-save,
 .js-icon-delete {
@@ -437,8 +450,9 @@ button:hover .js-icon-save, button:focus .js-icon-save {
     margin-bottom: 16px; }
   .js-card__text p {
     font-size: 15px;
-    line-height: 1.5;
-    margin-bottom: 16px; }
+    line-height: 1.5; }
+    .js-card__text p:first-of-type {
+      margin-bottom: 16px; }
 
 .js-news-list,
 [data-saved] {

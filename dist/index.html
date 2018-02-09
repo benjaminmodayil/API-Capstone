@@ -24,13 +24,10 @@
       <a href="saved.html" class="text-black no-underline m-left-8">Saved</a>
     </div>
   </nav>
-  <header class="home-header wrapper text-white font-sans text-center p-top-96 m-bottom-32">
-    <h2 class="h2 uppercase m-bottom-32 uppercase font-bold">Search for a topic
-    </h2>
-
-    <form action="post" class="m-bottom-48 m-center" aria-controls="aria-live-newsfeed">
+  <header class="home-header wrapper text-white font-sans text-center p-top-32 m-bottom-32">
+    <form action="post" class="m-center" aria-controls="aria-live-newsfeed">
       <label for="query" class="text-left screenreader-only">Query</label>
-      <input class="p-left-8 m-bottom-16 js-input--width" type="text" placeholder="ex: Bitcoin" id="query" name="query">
+      <input class="p-left-8 m-bottom-16 js-input--width" type="text" placeholder="ex: Bitcoin" autocorrect="on" id="query" name="query">
 
       <button type="submit" class="bg-blue search-button js-search--width">
         <span class="screenreader-only text-white f-s-16 p-botttom-16">Search</span>
@@ -38,11 +35,11 @@
       </button>
       <div class="home-header__more-container m-center text-right">
         <button type="button" class="home-header__more float-right m-bottom-16">
-          <span class="home-header__more__text text-white">more</span>
+          <span class="home-header__more__text text-white">filter</span>
           <img src="images/icon-expand.svg" alt="">
         </button>
       </div>
-      <div data-isopen="false" class="js-initialize-form hidden-fields screenreader-only--with-space text-black wrapper wrapper-500 m-center text-white text-left">
+      <div data-isopen="false" class="js-initialize-form hidden-fields screenreader-only--with-space text-black wrapper m-bottom-32 wrapper-500 m-center text-white text-left">
         <div class="date-1 m-bottom-16">
           <label class="block m-bottom-14" for="date-1">Beginning Date</label>
           <input class="block" type="date" name="date-1" id="date-1">
@@ -62,10 +59,9 @@
       <h2 class="h2 font-light font-sans f-s-28 uppercase m-bottom-14">About
         <span class="font-bold block f-s-36">Newsme</span>
       </h2>
-      <p class="wrapper wrapper-500 f-s-16">Newsme is a small application making calls to
-        <a class="text-white font-bold" href="https://newsapi.org/">NewsAPI</a>. It allows you to see the top news related to the current day (tends to track in the news for the last
-        few days), filter any news via a category button, or search via a topic term. You can also save an article to localstorage
-        for future reading. It's built using ES6's Fetch API, SCSS, CSS Grid, and a multitude of things via Gulp's pipeline.
+      <p class="wrapper wrapper-500 f-s-16">Newsme is a feed of relevant news for the day or surrounding a specific topic of interest using
+        <a class="text-white font-bold" href="https://newsapi.org/">NewsAPI</a>. You can also save an article to localstorage for future reading. It's built using ES6's Fetch API, SCSS,
+        CSS Grid, and a multitude of things via Gulp's pipeline.
       </p>
       <a class="block text-white font-bold m-top-32" href="https://github.com/benjaminmodayil/api-capstone">Link to Github</a>
     </div>

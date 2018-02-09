@@ -39,12 +39,6 @@ gulp.task('sass', function() {
     .src('app/scss/**/*.scss')
     .pipe(plumber({ errorHandler: onError }))
     .pipe(sass()) // Using gulp-sass
-    .pipe(
-      purgecss({
-        content: ['app/**/*.html'],
-        whitelistPatterns: [/js/]
-      })
-    )
     .pipe(gulp.dest('app/css'))
     .pipe(
       browserSync.reload({
@@ -58,6 +52,12 @@ gulp.task('sass-build', function() {
   return gulp
     .src('app/css/**/*.css')
     .pipe(plumber({ errorHandler: onError }))
+    .pipe(
+      purgecss({
+        content: ['app/**/*.html'],
+        whitelistPatterns: [/js/]
+      })
+    )
     .pipe(gulp.dest('dist/css/'))
 })
 
