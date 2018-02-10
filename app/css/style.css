@@ -751,8 +751,12 @@ p {
 .nav__logo p {
   width: 75%; }
 
+.nav__logo img {
+  margin-top: 0.1rem;
+  max-width: 40px; }
+
 form {
-  width: 370px; }
+  max-width: 370px; }
   form input {
     width: 100%; }
 
@@ -787,15 +791,13 @@ form {
 
 .search-button {
   border: 0;
+  border-radius: 4px;
   cursor: pointer;
   height: 40px;
   position: relative;
   width: 100%; }
   .search-button.js-search--width {
-    margin-left: -55px;
-    right: -10px;
-    top: 6px;
-    width: 50px; }
+    max-width: 200px; }
 
 .js-img--size {
   bottom: 10px;
@@ -807,9 +809,10 @@ input#query {
   border: 3px solid #2b3947;
   height: 40px;
   font-size: 14px;
+  max-width: 340px;
   width: 100%; }
   input#query.js-input--width {
-    width: 335px; }
+    max-width: 100%; }
 
 input[type='date'],
 select {
@@ -854,7 +857,7 @@ select {
 .hidden-fields {
   border-radius: 4px;
   opacity: 1;
-  width: 370px; }
+  max-width: 370px; }
   .hidden-fields:after {
     content: '';
     display: table;
@@ -915,6 +918,13 @@ label[for='select-category'] {
   font-size: 36px;
   font-weight: 700; }
 
+@media screen and (min-width: 901px) {
+  .search-button.js-search--width {
+    margin-left: -55px;
+    right: -10px;
+    top: 6px;
+    width: 50px; } }
+
 footer {
   background-image: url(../images/bg-triangles.svg);
   background-repeat: no-repeat;
@@ -945,6 +955,8 @@ main {
     height: 35px;
     position: relative;
     width: 35px; }
+    .js-card button:focus {
+      outline: 0; }
   .js-card a {
     color: #2e2e2e;
     text-decoration: none; }
@@ -1007,11 +1019,21 @@ button:hover .js-icon-save, button:focus .js-icon-save {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px; }
 
+.js-card__description {
+  margin-bottom: 1.8rem; }
+
 .js-card__text {
-  word-wrap: break-word; }
+  word-break: break-word; }
   .js-card__text h2 {
-    font-size: 20px;
     margin-bottom: 16px; }
+    .js-card__text h2 {
+      font-size: 18px; }
+      @media screen and (min-width: 600px) {
+        .js-card__text h2 {
+          font-size: calc( 18px + 4 * (( 100vw - 600px ) / 800)); } }
+      @media screen and (min-width: 1400px) {
+        .js-card__text h2 {
+          font-size: 22px; } }
   .js-card__text p {
     font-size: 15px;
     line-height: 1.5; }
@@ -1030,7 +1052,7 @@ button:hover .js-icon-save, button:focus .js-icon-save {
   .js-card__container {
     border-radius: 0; } }
 
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 900px) {
   .js-card__img-container {
     display: none; } }
 
@@ -1048,8 +1070,7 @@ button:hover .js-icon-save, button:focus .js-icon-save {
     grid-column: span 6;
     grid-row: span 4; }
     .js-span-half .js-card__img {
-      height: 100%;
-      width: 250px; }
+      height: 100%; }
   .js-span-quarter {
     grid-row: span 4;
     grid-column: span 3; }

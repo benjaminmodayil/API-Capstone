@@ -235,7 +235,7 @@ function showFields() {
     }, 50)
     $searchButton.removeClass('js-search--width')
     $searchButton.find('.screenreader-only').removeClass('screenreader-only')
-    $('input#query').removeClass('js-input--width')
+    $('input#query').addClass('js-input--width')
     $searchButton.find('img').addClass('js-img--size')
     $form.append($searchButton)
   } else if ($form.attr('data-isopen') === 'true') {
@@ -246,11 +246,10 @@ function showFields() {
     setTimeout(() => {
       $form.toggleClass('js-initialize-form')
     }, 50)
-
     $searchButton.addClass('js-search--width')
     $searchButton.find('span').addClass('screenreader-only')
     $searchButton.find('img').removeClass('js-img--size')
-    $('input#query').addClass('js-input--width')
+    $('input#query').removeClass('js-input--width')
     $('input#query').after($searchButton)
   }
 }

@@ -1,7 +1,7 @@
 $form-width: 370px;
 
 form {
-  width: $form-width;
+  max-width: $form-width;
   input {
     width: 100%;
   }
@@ -42,16 +42,14 @@ form {
 
 .search-button {
   border: 0;
+  border-radius: 4px;
   cursor: pointer;
   height: 40px;
   position: relative;
   width: 100%;
 
   &.js-search--width {
-    margin-left: -55px;
-    right: -10px;
-    top: 6px;
-    width: 50px;
+    max-width: 200px;
   }
 }
 
@@ -66,10 +64,11 @@ input#query {
   border: 3px solid color(blue);
   height: 40px;
   font-size: 14px;
+  max-width: 340px;
   width: 100%;
 
   &.js-input--width {
-    width: 335px;
+    max-width: 100%;
   }
 }
 
@@ -126,7 +125,7 @@ select {
 
   border-radius: 4px;
   opacity: 1;
-  width: $form-width;
+  max-width: $form-width;
 
   &.js-initialize-form {
     opacity: 0;
@@ -162,7 +161,6 @@ label[for='select-category'] {
 .home-header__more-container {
   @include clearfix();
   clear: both;
-  // width: $form-width;
 }
 
 .hidden-fields {
@@ -196,4 +194,15 @@ label[for='select-category'] {
   display: block;
   font-size: 36px;
   font-weight: 700;
+}
+
+@media screen and (min-width: 901px) {
+  .search-button {
+    &.js-search--width {
+      margin-left: -55px;
+      right: -10px;
+      top: 6px;
+      width: 50px;
+    }
+  }
 }

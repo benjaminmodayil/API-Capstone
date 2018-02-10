@@ -31,11 +31,13 @@ main {
 
   button {
     background-color: transparent;
-    // bottom: -10px;
     height: 35px;
     position: relative;
-    // right: -90%;
     width: 35px;
+
+    &:focus {
+      outline: 0;
+    }
   }
 
   a {
@@ -73,13 +75,10 @@ button {
 @keyframes slidetoleft {
   from {
     opacity: 0;
-    // transform: translate(-500px, 0);
     transform: translate(40px);
   }
-
   to {
     opacity: 1;
-    // transform: translateX(0, 0);
     transform: translate(0px);
   }
 }
@@ -134,11 +133,16 @@ button {
   }
 }
 
+.js-card__description {
+  margin-bottom: 1.8rem;
+}
+
 .js-card__text {
-  word-wrap: break-word;
+  word-break: break-word;
 
   h2 {
-    font-size: 20px;
+    @include fluid-type(600px, 1400px, 18px, 22px);
+
     margin-bottom: 16px;
   }
 
@@ -166,7 +170,7 @@ button {
   }
 }
 
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 900px) {
   .js-card__img-container {
     display: none;
   }
@@ -194,7 +198,6 @@ button {
 
     .js-card__img {
       height: 100%;
-      width: 250px;
     }
   }
 

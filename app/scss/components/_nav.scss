@@ -20,7 +20,13 @@
   a {
     @include clearfix();
   }
+
   p {
     width: 75%;
+  }
+
+  img {
+    margin-top: 0.1rem;
+    max-width: 40px;
   }
 }
