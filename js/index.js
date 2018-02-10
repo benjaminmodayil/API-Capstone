@@ -192,10 +192,12 @@ class ArticlePage {
     let $queryValue, $date1Value, $date2Value, $selectValue, $URL
     $('.js-category--highlight').removeClass('js-category--highlight')
     $queryValue = $('input[name="query"]').val() || ''
-    $date1Value = $('input[name="date-1"').val()
-      ? `&from=${$('input[name="date-1"').val()}`
+    $date1Value = $('input[name="date-1"]').val()
+      ? `&from=${$('input[name="date-1"]').val()}`
       : ''
-    $date2Value = $('input[name="date-2"') ? `&to=${$('input[name="date-2"').val()}` : ''
+    $date2Value = $('input[name="date-2"]')
+      ? `&to=${$('input[name="date-2"]').val()}`
+      : ''
     $selectValue = `&category=${$('select').val()}` || ''
     $URL = `https://newsapi.org/v2/everything?q=${$queryValue}${$date1Value}&sortBy=popularity&apiKey=${newsAPIKey}`
     if ($queryValue.trim() === '') {
