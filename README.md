@@ -16,4 +16,4 @@ Newsme lets you search for news, apply a category, set a date range, and even sa
 
 ![GIF of userflow](/app/images/screenshots/newsme-1.gif 'GIF of Userflow')
 
-![Screenshot of Application](/app/images/screenshots/newsme-1.gif 'Screenshot of Application')
+![Screenshot of Application](/app/images/screenshots/newsme-2.png 'Screenshot of Application')
