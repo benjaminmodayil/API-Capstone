@@ -12,7 +12,7 @@
 </head>
 
 <body class="home-page" data-index>
-  <nav class="nav wrapper p-y-16 box-shadow">
+  <nav class="nav wrapper p-y-16 box-shadow" role="navigation">
     <div class="nav__logo">
       <a href="./index.html" class="text-black no-underline block">
         <img class="float-left m-right-16" src="images/icon-news.svg" alt="">
@@ -24,7 +24,7 @@
       <a href="saved.html" class="text-black no-underline m-left-8">Saved</a>
     </div>
   </nav>
-  <header class="home-header wrapper text-white font-sans text-center p-top-32 m-bottom-32">
+  <header class="home-header wrapper text-white font-sans text-center p-top-32 m-bottom-32" role="banner">
     <form action="post" class="m-center" aria-controls="aria-live-newsfeed">
       <label for="query" class="text-left screenreader-only">Query</label>
       <input class="p-left-8 m-bottom-16" type="text" placeholder="ex: Bitcoin" autocorrect="on" id="query" name="query">
@@ -52,9 +52,9 @@
     </form>
   </header>
 
-  <main class="container" aria-live="assertive" id="aria-live-newsfeed"></main>
+  <main class="container" aria-live="assertive" id="aria-live-newsfeed" role="main"></main>
 
-  <footer class="wrapper text-white p-y-64">
+  <footer class="wrapper text-white p-y-64" role="contentinfo">
     <div class="wrapper wrapper-1200 m-center">
       <h2 class="h2 font-light font-sans f-s-28 uppercase m-bottom-14">About
         <span class="font-bold block f-s-36">Newsme</span>

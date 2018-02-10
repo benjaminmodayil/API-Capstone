@@ -191,8 +191,6 @@ button {
   .js-span-half {
     display: grid;
     grid-template-columns: 1fr 2fr;
-    height: 100%;
-
     grid-column: span 6;
     grid-row: span 4;
 
@@ -215,8 +213,6 @@ button {
   [data-saved] {
     grid-gap: 40px;
     grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: repeat(autofit, 50px);
-    // grid-template-rows: repeat(12, 50px);
   }
 }
 
