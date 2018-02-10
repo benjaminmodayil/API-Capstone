@@ -47,12 +47,17 @@ class ArticlePage {
   }
 
   fetchQuery(query) {
+    // I used ES6's Fetch for this project, but commented below is another way with jquery:
+    // $.ajax({ dataType: 'json', url: query }).then(data => {
+    //   console.log(data.articles)
+    // })
+
     let myHeaders = new Headers()
     let myInit = { method: 'GET', headers: myHeaders, mode: 'cors', cache: 'default' }
 
     let currentDay = new Date()
     currentDay = currentDay.toISOString().substring(0, 10)
-
+    console.log(query)
     fetch(
       query
         ? query
@@ -195,11 +200,11 @@ class ArticlePage {
     $date1Value = $('input[name="date-1"]').val()
       ? `&from=${$('input[name="date-1"]').val()}`
       : ''
-    $date2Value = $('input[name="date-2"]')
+    $date2Value = $('input[name="date-2"]').val()
       ? `&to=${$('input[name="date-2"]').val()}`
       : ''
     $selectValue = `&category=${$('select').val()}` || ''
-    $URL = `https://newsapi.org/v2/everything?q=${$queryValue}${$date1Value}&sortBy=popularity&apiKey=${newsAPIKey}`
+    $URL = `https://newsapi.org/v2/everything?q=${$queryValue}${$date1Value}${$date2Value}&sortBy=popularity&apiKey=${newsAPIKey}`
     if ($queryValue.trim() === '') {
       return
     } else {
