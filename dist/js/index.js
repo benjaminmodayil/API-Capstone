@@ -38,8 +38,12 @@ class ArticlePage {
     this.data = []
     this.currentArticles = []
 
-    $('.home-page').on('click', '[data-category]', this.categoryFetch.bind(this))
-    $('form').on('submit', this.handleForm.bind(this))
+    $('.home-page').on(
+      'click touchstart',
+      '[data-category]',
+      this.categoryFetch.bind(this)
+    )
+    $('form').on('submit touchstart', this.handleForm.bind(this))
   }
 
   fetchQuery(query) {
@@ -93,7 +97,7 @@ class ArticlePage {
       listContainer.insertAdjacentHTML('beforeend', element)
     })
 
-    $('.js-card__button').on('click', function(e) {
+    $('.js-card__button').on('click touchstart', function(e) {
       let $current, title, description, author, url, urlToImage
 
       $current = $(e.currentTarget)
@@ -219,7 +223,7 @@ function formFocus() {
   $('input:text:visible:first').focus()
 }
 
-$('.home-header__more').on('click', showFields)
+$('.home-header__more').on('click touchstart', showFields)
 
 function showFields() {
   let $form = $('.hidden-fields')
