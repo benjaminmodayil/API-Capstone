@@ -11,7 +11,7 @@ tempItems.map((item, i) => {
   $('[data-saved]').append(element)
 })
 
-$('.js-remove-saved').on('click', function(e) {
+$('.js-remove-saved').on('click touchstart', function(e) {
   $current = $(e.currentTarget)
   title = $current
     .closest('li')
