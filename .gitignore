@@ -3,3 +3,4 @@ config.codekit3
 #todo
 node_modules
 .publish
+dist

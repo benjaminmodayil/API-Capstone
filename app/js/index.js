@@ -1,5 +1,3 @@
-let newsAPIKey = 'ed14c7ddee15497fb440c9369baf1371'
-
 // double check form
 
 // make saved.js into class structure
